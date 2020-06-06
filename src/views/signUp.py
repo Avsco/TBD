@@ -1,8 +1,8 @@
-from tkinter import Canvas, Frame, Label, Entry, Button, S
+from tkinter import Frame, Label, Entry, Button, S
 from src.modules.signUp.index import mainSignUp
 
-def printSignUp(root):
-    canvas = Canvas(root, height=260, width=320)
+def printSignUp(canvas):
+    canvas.config(height=260, width=320)
     canvas.pack()
 
     frame = Frame()
@@ -47,7 +47,6 @@ def printSignUp(root):
 def signUp(name, username, password, mensage):
    try:
         if name != '' and username != '' and password != '':
-            print(name, username, password)
             mainSignUp(name, username, password)
             changeMensaje(mensage, "Registrado correctamente!", "green")
         else:

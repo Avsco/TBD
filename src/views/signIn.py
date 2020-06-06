@@ -1,9 +1,10 @@
-from tkinter import Canvas, Frame, Label, Entry, Button
+from tkinter import Frame, Label, Entry, Button
 from src.modules.signIn.index import mainSignIn
+from src.views.mainFrame import printMainFrame
+from src.classes.user import User
 
-def printSignIn(root):
-    canvas = Canvas(root, height=210, width=300)
-    canvas.pack()
+def printSignIn(canvas):
+    canvas.config(height=210, width=300)
 
     frame = Frame()
     frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
@@ -29,17 +30,19 @@ def printSignIn(root):
     buttonsignIn = Button(frame, text="SignIn", command=lambda: signIn(
         entryUsername.get(),
         entryPassword.get(),
-        labelMensaje
+        labelMensaje,
+        canvas
     ))
     buttonsignIn.grid(row=4, column=1, pady=10)
 
 
-def signIn(username, password, mensaje):
+def signIn(username, password, mensaje, canvas):
     try:
         if username != '' and password != '':
-            #print(username, password)
-            if mainSignIn(username, password):
+            res = mainSignIn(username, password)
+            if res:
                 changeMensaje(mensaje, "Logueado exitosamene", "green")
+                printMainFrame(canvas, User(res[0], res[1], username))
             else:
                 changeMensaje(mensaje, "Ingrese sus datos correctamente", "red")
         else:
