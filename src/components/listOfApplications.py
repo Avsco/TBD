@@ -1,9 +1,11 @@
 from tkinter import Label, Listbox, END, Button, Entry
-
+from src.modules.postulation.index import getPostulation
+from src.modules.subject.index import getSubjectsById
 
 class ListOfApplications():
     
-    def __init__(self, frame, column):
+    def __init__(self, frame, column, user_id):
+        self.user_id = user_id
         self.frame = frame
         self.column = column
         self.created()
@@ -17,4 +19,7 @@ class ListOfApplications():
         self.listOfApplications.grid(column=self.column, row=1)
 
     def mounted(self):
-        pass
+        for postulation in getPostulation(self.user_id):
+            nameSubject = getSubjectsById(postulation[0])
+            self.listOfApplications.insert(END, (nameSubject, postulation[2]))
+        
