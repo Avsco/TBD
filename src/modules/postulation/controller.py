@@ -17,3 +17,14 @@ def GET(cur, id_student):
         return cur.fetchall()
     except Exception as e:
         print(e)
+
+def GETSubjectsOfPostulations(cur, id_postulant):
+    try:
+        SQL = """SELECT DISTINCT subject.id_subject, subject.subject_name FROM(
+                    SELECT id_subject FROM postulation 
+                    WHERE id_postulant=%s) AS uno, subject
+                WHERE uno.id_subject = subject.id_subject;"""
+        cur.execute(SQL, [id_postulant])
+        return cur.fetchall()
+    except Exception as e:
+        print(e)

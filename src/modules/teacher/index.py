@@ -1,7 +1,7 @@
 from src.modules.database import getConnection
-from src.modules.subject.controller import GET, SHOW
+from src.modules.teacher.controller import GET, SHOW
 
-def getSubjects(): 
+def getTeachers(): 
     try:
         conn = getConnection()
         cur = conn.cursor()
@@ -13,7 +13,7 @@ def getSubjects():
         print(e)
         return None
 
-def getSubjectsById(id):
+def getTeacherById(id):
     try:
         conn = getConnection()
         cur = conn.cursor()

@@ -1,5 +1,5 @@
 from src.modules.database import getConnection
-from src.modules.postulation.controller import POST, GET
+from src.modules.postulation.controller import POST, GET, GETSubjectsOfPostulations
 
 def insertPostulation(id_subject, id_postulant):
     try:
@@ -23,4 +23,13 @@ def getPostulation(id_student):
     except Exception as e:
         print(e)
 
-print(getPostulation(2))
+def getSubjectsByPostulant(id_postulant):
+    try:
+        conn = getConnection()
+        cur = conn.cursor()
+        subjects = GETSubjectsOfPostulations(cur, id_postulant)
+        conn. commit()
+        cur.close()
+        return subjects
+    except Exception as e:
+        print(e)
