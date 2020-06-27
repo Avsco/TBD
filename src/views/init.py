@@ -23,7 +23,7 @@ def init():
 
 
     def on_closing():
-        if messagebox.askokcancel("Quit", "Do you want to quit?"):
+        if messagebox.askokcancel(title="Quit", message="Do you want to quit?"):
             signOff()
             root.destroy()
 
